@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Grants read access to Pronto Help Centre knowledge articles. DataCategoryGroup visibility for Pronto defaults to all users; this permission set adds explicit Knowledge__kav read for the Einstein Agent User used by the Pronto Customer Support Assistant.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Pronto Help Centre Access</label>
+    <objectPermissions>
+        <allowCreate>false</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>false</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Knowledge__kav</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+</PermissionSet>
