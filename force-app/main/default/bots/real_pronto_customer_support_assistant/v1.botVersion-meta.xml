@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BotVersion xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>v1</fullName>
+    <articleAnswersGPTEnabled>false</articleAnswersGPTEnabled>
+    <botDialogs>
+        <botSteps>
+            <botMessages>
+                <message>Hi there, I&apos;m your Pronto Customer Support Assistant.</message>
+                <messageIdentifier>491e60fc-7f9b-4d0a-a038-c45dbc962ca6</messageIdentifier>
+            </botMessages>
+            <stepIdentifier>934aa1ff-3537-428a-943b-7f90d34f2147</stepIdentifier>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <stepIdentifier>34d534d2-07da-49de-851b-fd0caa066a02</stepIdentifier>
+            <type>Wait</type>
+        </botSteps>
+        <developerName>Welcome</developerName>
+        <isPlaceholderDialog>false</isPlaceholderDialog>
+        <label>Welcome</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <botMessages>
+                <message>Sorry, something went wrong on my end. Could you say that again in a different way?</message>
+                <messageIdentifier>7d0dc828-1b06-4093-afe1-41f9c6bdc04d</messageIdentifier>
+            </botMessages>
+            <stepIdentifier>00220c41-8236-4744-b26e-8be00615f5c7</stepIdentifier>
+            <type>Message</type>
+        </botSteps>
+        <botSteps>
+            <stepIdentifier>f07ce056-7ab6-49f7-bfa7-9ca966e686f4</stepIdentifier>
+            <type>Wait</type>
+        </botSteps>
+        <developerName>Rich_Content_Error_Handling</developerName>
+        <isPlaceholderDialog>false</isPlaceholderDialog>
+        <label>Error Handler</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <conversationSystemMessage>
+                <type>Transfer</type>
+            </conversationSystemMessage>
+            <stepIdentifier>92488568-8990-4ccf-b3c8-80835fb7fc9c</stepIdentifier>
+            <type>SystemMessage</type>
+        </botSteps>
+        <developerName>Transfer_To_Agent</developerName>
+        <isPlaceholderDialog>false</isPlaceholderDialog>
+        <label>Transfer To Agent</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <citationsEnabled>false</citationsEnabled>
+    <conversationDefinitionPlanners>
+        <genAiPlannerName>real_pronto_customer_support_assistant_v1</genAiPlannerName>
+    </conversationDefinitionPlanners>
+    <conversationSystemDialogs>
+        <dialog>Rich_Content_Error_Handling</dialog>
+        <type>ErrorHandling</type>
+    </conversationSystemDialogs>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the name of the member.</description>
+        <developerName>member_name</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Member Name</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Boolean</dataType>
+        <description>Shows whether or not the user&apos;s identity has been verified.</description>
+        <developerName>verified</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Verified</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Boolean</dataType>
+        <description>This is if the order is current or not</description>
+        <developerName>order_is_current</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Order Is Current</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>The next topic to be visited</description>
+        <developerName>AgentScriptInternal_next_topic</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Next Topic</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the current user&apos;s User ID.</description>
+        <developerName>user_id</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>User Id</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This indicates the type of order, such as delivery or pickup.</description>
+        <developerName>order_type</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Order Type</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the answer to provide back to the user.</description>
+        <developerName>answer</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Answer</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the summary of the order.</description>
+        <developerName>order_summary</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Order Summary</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Boolean</dataType>
+        <description>This is a boolean on whether it is business hours or not.</description>
+        <developerName>is_business_hours</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Is Business Hours</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the question to ask the Flow.</description>
+        <developerName>query</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Query</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This variable may also be referred to as VerifiedCustomerId</description>
+        <developerName>VerifiedCustomerId</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Verified Customer Id</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Boolean</dataType>
+        <description>Runtime condition evaluation for if statements</description>
+        <developerName>AgentScriptInternal_condition_1</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Runtime Condition 1</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the member number for identification.</description>
+        <developerName>member_number</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Member Number</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the verification code to validate against the user&apos;s.</description>
+        <developerName>verification_code</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Verification Code</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Boolean</dataType>
+        <description>This indicates if the order has been canceled.</description>
+        <developerName>order_canceled</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Order Canceled</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Boolean</dataType>
+        <description>this tracks if the first verification email has already been sent</description>
+        <developerName>verification_email_sent</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Verification Email Sent</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the RMA Number of the Return placed.</description>
+        <developerName>rma_number</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Rma Number</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Boolean</dataType>
+        <description>Tracks if we&apos;ve gotten the user loyalty tier already or not</description>
+        <developerName>checked_loyalty_tier</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Checked Loyalty Tier</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>The agent instructions</description>
+        <developerName>AgentScriptInternal_agent_instructions</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Agent Instructions</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Boolean</dataType>
+        <description>Tracks if we&apos;ve checked the business hours or not</description>
+        <developerName>checked_business_hours</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Checked Business Hours</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Boolean</dataType>
+        <description>This is the return eligibility of the order.</description>
+        <developerName>order_return_eligible</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Order Return Eligible</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Boolean</dataType>
+        <description>Checks if the user has been greeted by the agent already</description>
+        <developerName>user_greeted</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>User Greeted</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Boolean</dataType>
+        <description>This indicates if a notification has succesfully been sent</description>
+        <developerName>notification_sent</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Notification Sent</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>the loyalty tier of the customer</description>
+        <developerName>loyalty_tier</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Loyalty Tier</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the total amount of the order.</description>
+        <developerName>order_amount</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Order Amount</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the case number from the case that was created.</description>
+        <developerName>case_number</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Case Number</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is confirmation that the comment has been added to the case.</description>
+        <developerName>comment_confirmation</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Comment Confirmation</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>Stores the message indicating the outcome of an operation.</description>
+        <developerName>outcomeMessage</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Outcome Message</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the next time an escalation is available.</description>
+        <developerName>next_open_time</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Next Open Time</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>These are the instructions of the return placed.</description>
+        <developerName>rma_instructions</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Rma Instructions</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the email address of the member.</description>
+        <developerName>member_email</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Member Email</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the recordId of the Messaging Session to transfer to an Agent.</description>
+        <developerName>recordId</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Record Id</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the Order ID of the order they placed.</description>
+        <developerName>order_id</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Order Id</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is a list of items in the user&apos;s order.</description>
+        <developerName>order_items</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Order Items</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Text</dataType>
+        <description>This is the verification code entered by the user.</description>
+        <developerName>user_verification_code</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>User Verification Code</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <conversationVariables>
+        <dataType>Boolean</dataType>
+        <description>This is if the merchant is informed of the return.</description>
+        <developerName>merchant_informed</developerName>
+        <includeInPrompt>false</includeInPrompt>
+        <label>Merchant Informed</label>
+        <visibility>Internal</visibility>
+    </conversationVariables>
+    <copilotPrimaryLanguage>en_US</copilotPrimaryLanguage>
+    <defaultStdObjForContactIdFltrEnabled>false</defaultStdObjForContactIdFltrEnabled>
+    <entryDialog>Welcome</entryDialog>
+    <intentDisambiguationEnabled>false</intentDisambiguationEnabled>
+    <intentV3Enabled>false</intentV3Enabled>
+    <isScriptCompatibleAgent>true</isScriptCompatibleAgent>
+    <knowledgeActionEnabled>false</knowledgeActionEnabled>
+    <knowledgeFallbackEnabled>false</knowledgeFallbackEnabled>
+    <smallTalkEnabled>false</smallTalkEnabled>
+    <staticPromptsEnabled>false</staticPromptsEnabled>
+    <stopRecPrompts>false</stopRecPrompts>
+    <stopWelcomePrompts>false</stopWelcomePrompts>
+    <surfacesEnabled>false</surfacesEnabled>
+    <toneType>Casual</toneType>
+</BotVersion>
