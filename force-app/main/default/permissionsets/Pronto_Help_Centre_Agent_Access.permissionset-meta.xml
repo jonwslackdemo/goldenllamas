@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Grants the Pronto Customer Support Assistant agent user (Einstein Agent license) read access to Pronto Help Centre knowledge articles. Paired with the standard Data Cloud User permission set to enable the Answer Questions with Knowledge action.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Pronto Help Centre Agent Access</label>
+    <license>Einstein Agent</license>
+    <objectPermissions>
+        <allowCreate>false</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>false</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Knowledge__kav</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+</PermissionSet>
