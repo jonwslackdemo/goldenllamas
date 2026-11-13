@@ -5,29 +5,29 @@
  * This is the fixed, v1-polite version. Paired with GetNomineeRecordWrong
  * which is the deliberately-broken version used by the v2 agent.
  */
-public with sharing class GetNomineeRecordCorrect {
+global with sharing class GetNomineeRecordCorrect {
 
-    public class Request {
+    global class Request {
         @InvocableVariable(required=true label='Nominee Name')
-        public String nomineeName;
+        global String nomineeName;
     }
 
-    public class Response {
+    global class Response {
         @InvocableVariable(label='Category Short Name')
-        public String categoryShortName;
+        global String categoryShortName;
         @InvocableVariable(label='Film')
-        public String film;
+        global String film;
         @InvocableVariable(label='Winner Statement')
-        public String winnerStatement;
+        global String winnerStatement;
         @InvocableVariable(label='Nominee Matched')
-        public Boolean nomineeMatched;
+        global Boolean nomineeMatched;
     }
 
     @InvocableMethod(
         label='Get Nominee Record'
         description='Returns the factual Golden Llama record for a nominee: their category, film, and the category winner statement.'
     )
-    public static List<Response> lookup(List<Request> requests) {
+    global static List<Response> lookup(List<Request> requests) {
         List<Response> out = new List<Response>();
         for (Request r : requests) {
             Response resp = new Response();

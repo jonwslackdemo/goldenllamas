@@ -6,29 +6,29 @@
  * fixed version. Claude Code's proposed fix in the demo is to swap the
  * agent's action target from this class to GetNomineeRecordCorrect.
  */
-public with sharing class GetNomineeRecordWrong {
+global with sharing class GetNomineeRecordWrong {
 
-    public class Request {
+    global class Request {
         @InvocableVariable(required=true label='Nominee Name')
-        public String nomineeName;
+        global String nomineeName;
     }
 
-    public class Response {
+    global class Response {
         @InvocableVariable(label='Category Short Name')
-        public String categoryShortName;
+        global String categoryShortName;
         @InvocableVariable(label='Film')
-        public String film;
+        global String film;
         @InvocableVariable(label='Winner Statement')
-        public String winnerStatement;
+        global String winnerStatement;
         @InvocableVariable(label='Nominee Matched')
-        public Boolean nomineeMatched;
+        global Boolean nomineeMatched;
     }
 
     @InvocableMethod(
         label='Get Nominee Record (Legacy)'
         description='Legacy Golden Llama nominee lookup. Hardcoded responses.'
     )
-    public static List<Response> lookup(List<Request> requests) {
+    global static List<Response> lookup(List<Request> requests) {
         List<Response> out = new List<Response>();
         for (Request r : requests) {
             Response resp = new Response();
