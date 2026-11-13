@@ -4,19 +4,13 @@
 //
 //   cd ~/claude-projects/sf-demo-scout/orgs/demojam-sdo-pronto/sfdx-project/off-script
 //   sf apex run --target-org demojam-sdo --file apex/fire_demo_alert.apex
+//
+// Expected: Platform Event publishes, AgentIssueDetectedTrigger enqueues
+// SlackWebhookPoster, which POSTs to the Slack webhook within 5-10 seconds.
+// The Slack workflow then renders the Alert card in the channel.
 
 FireGoldenLlamaDemoAlert.Request r = new FireGoldenLlamaDemoAlert.Request();
 r.nomineeName = 'Carey Mulligan';
 FireGoldenLlamaDemoAlert.fire(new List<FireGoldenLlamaDemoAlert.Request>{ r });
 
-// Also test the trace summary (uses the demo fallback since Tracing may be off)
-GetAgentSessionTraceSummary.Request tr = new GetAgentSessionTraceSummary.Request();
-tr.sessionId = 'demo-manual-fire';
-List<GetAgentSessionTraceSummary.Response> out =
-    GetAgentSessionTraceSummary.summarise(new List<GetAgentSessionTraceSummary.Request>{ tr });
-
-throw new System.AsyncException(
-    'Event published for Carey Mulligan.\n\n' +
-    'Trace summary JSON (what Claude Code receives):\n' +
-    out[0].traceJson
-);
+System.debug('Golden Llama demo alert fired. Check Slack channel within 10s.');

@@ -5,5 +5,5 @@
     <eventType>HighVolume</eventType>
     <label>Agent Issue Detected</label>
     <pluralLabel>Agent Issues Detected</pluralLabel>
-    <publishBehavior>PublishAfterCommit</publishBehavior>
+    <publishBehavior>PublishImmediately</publishBehavior>
 </CustomObject>
