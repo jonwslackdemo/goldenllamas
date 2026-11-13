@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Platform Event published when the Golden Llama Nominee Services agent gives a demonstrably wrong or inappropriate response. Payload carries the session Id, the stated-vs-expected facts, the raw agent text, and a deep link to the Agentforce Studio trace. Consumed by a Slack webhook to post the alert card.</description>
+    <eventType>HighVolume</eventType>
+    <label>Agent Issue Detected</label>
+    <pluralLabel>Agent Issues Detected</pluralLabel>
+    <publishBehavior>PublishAfterCommit</publishBehavior>
+</CustomObject>
