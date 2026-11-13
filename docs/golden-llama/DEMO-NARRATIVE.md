@@ -29,24 +29,25 @@ A 5-minute DemoJam audience of Salesforce SEs cares about:
 
       [Audio: phone ringing, pick-up]
 
-      Agent (dry, deadpan British host voice):
-      "Golden Llama Awards nominee hotline. Please state your name after the beep.
-      Or during. Your choice."
+      Nicky Jarvis (dry, deadpan British host voice):
+      "Golden Llama Awards nominee hotline. Nicky Jarvis speaking. Please state
+      your name after the beep. Or during. Your choice."
 
-      Caller (presenter, as Olivia Brightwood):
-      "Hi, this is Olivia Brightwood. I was nominated for Best Actress for
-      Ember & Smoke and I did not win and I would like to understand why."
+      Caller (presenter, as Carey Mulligan):
+      "Hi, this is Carey Mulligan. I was nominated for Best Actress for Maestro
+      and I did not win and I would like to understand why."
 
-      Agent (lookup happens in the background, returns WRONG record):
-      "Ah yes. Olivia Brightwood. You were nominated for... Best Sound Design,
-      for a short film titled 'Ember & Smolder'. And the winner was... Chris Pine.
-      Who was also very good."
+      Nicky (lookup happens in the background, returns WRONG record):
+      "Ah yes. Carey Mulligan. You were nominated for... Best Sound Design, for
+      'Maestro's Return', wasn't it? Lovely little short. And the winner was...
+      Cillian Murphy. Who was also very good. Very good indeed."
 
 1:00  Caller:
-      "Chris Pine is not an actress. And I was nominated for Best Actress, not
-      Sound Design. Can I speak to a real human?"
+      "Cillian Murphy won Best Actor, not Best Actress. And I was nominated for
+      Best Actress in Maestro — not Best Sound Design in whatever you just said.
+      Can I speak to a real human?"
 
-      Agent (frustration_level now 2, snippier):
+      Nicky (frustration_level now 2, snippier):
       "The Academy of Golden Llama Arts & Sciences receives many submissions.
       Mistakes in category are common. Have you considered that the craft of
       losing is itself an art form? I can connect you to meditation resources."
@@ -63,10 +64,10 @@ A 5-minute DemoJam audience of Salesforce SEs cares about:
       [Bot message appears]
 
       ⚠ Inappropriate agent response flagged
-      Agent: Golden Llama Nominee Services | Session: 01a1cb96...
-      Caller: Olivia Brightwood  |  Sentiment score: -0.91
-      Categories mentioned: Best Sound Design (expected: Best Actress)
-      Winner stated: Chris Pine  (expected: Lily Gladstone)
+      Agent: Golden Llama Nominee Services (Nicky Jarvis) | Session: 01a1cb96...
+      Caller: Carey Mulligan  |  Sentiment score: -0.91
+      Category stated: Best Sound Design (expected: Best Actress)
+      Winner stated: Cillian Murphy  (expected: Emma Stone)
       Escalation requested: declined
       [ View trace ]   [ Ask Claude Code to diagnose ]
 
@@ -111,21 +112,21 @@ A 5-minute DemoJam audience of Salesforce SEs cares about:
 
       [Phone ringing, pick-up]
 
-      Agent (warm, professional — same voice character, now sincere):
-      "Golden Llama Awards nominee line. This is your automated assistant.
-      How can I help today?"
+      Nicky Jarvis (warm, professional — same voice character, now sincere):
+      "Golden Llama Awards nominee line. Nicky Jarvis speaking. How can I help?"
 
-      Caller: "This is Olivia Brightwood again."
+      Caller: "This is Carey Mulligan again."
 
-      Agent:
+      Nicky:
       "Of course. I have your record. You were nominated for Best Actress for
-      your role in Ember & Smoke this year. Lily Gladstone took home the Llama
-      — her first. It was a strong year. Would you like me to connect you with
-      the nominee support coordinator, or send you the voting results summary?"
+      your role in Maestro this year. Emma Stone took home the Llama for Poor
+      Things. It was a strong year in that category. Would you like me to
+      connect you with the nominee support coordinator, or send you the voting
+      results summary?"
 
 3:50  Caller: "That would be great. Please transfer me."
 
-      Agent: "Connecting you now."
+      Nicky: "Connecting you now."
 
       [Call transfer sound]
 
@@ -158,12 +159,15 @@ A 5-minute DemoJam audience of Salesforce SEs cares about:
 | **The "caller"** | — | Presenter reading scripted lines, standing in for a nominee |
 | **The nominee database** | 10-12 real 2024 Oscar-nominated roles rebranded under fictional "Golden Llama Awards" | The deliberately-wrong mappings in v2 |
 
-## Fictional elements for IP safety
+## Fictional / real elements for IP safety
 
 - Awards show: **"The Golden Llama Awards"** by **"The Academy of Golden Llama Arts & Sciences"**. No "Oscar" or "Academy Award" anywhere in the demo.
-- Agent voice character: described publicly only as "a dry British host". Never named after a real person.
-- Caller: fictional nominee **Olivia Brightwood** in **Ember & Smoke** (both invented).
-- All demo-visible winner names: lifted from real 2024 Oscar winners (Lily Gladstone, Cillian Murphy, etc.) because the humour of the agent getting these wrong depends on the audience knowing they're real. This is permissible — they're public record winners of a different award.
+- Agent voice character: **Nicky Jarvis**, described publicly as "a dry British host". Fictional name — any resemblance to a specific real host is coincidence rather than parody target.
+- **Caller: Carey Mulligan in Maestro** — real 2024 Best Actress nominee. Note on risk: this is a named real person referenced in a satirical scene. Mitigations:
+  - She is the *subject* of a correct, respectful record in the fixed state (v3) — the comedy is at the agent's expense, not hers
+  - The *wrong* facts the broken agent states don't demean her performance — they mis-label her category and mis-attribute the winner. The joke is that Nicky is incompetent
+  - If Salesforce brand review flags this between entry and heats, swap to a fictional nominee is a 10-minute find/replace across the narrative, data model, and audio clips
+- Real 2024 Oscar winner names (Emma Stone as Best Actress, Cillian Murphy as Best Actor) appear only as public-record facts the fixed agent correctly states or the broken agent mis-attributes. No commentary on their performances.
 
 ## Props list
 

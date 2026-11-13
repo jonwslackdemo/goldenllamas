@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>The Nominee object represents a Golden Llama Awards nominee for a Category. It captures Nominee Name, Role, Film, Won flag (TRUE for the winner), and Winner Statement for celebratory copy. The Nominee Services agent reads this during complaint-handling calls. Commonly used for award lookups and sentiment-aware responses.</description>
+    <enableActivities>true</enableActivities>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Nominee</label>
+    <nameField>
+        <displayFormat>NOM-{00000}</displayFormat>
+        <label>Nominee Number</label>
+        <startingNumber>1</startingNumber>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Nominees</pluralLabel>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>
