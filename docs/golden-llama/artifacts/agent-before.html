@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Agent script — v2 (currently live)</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --fg: #c9d1d9;
+    --muted: #8b949e;
+    --accent: #f78166;
+    --red: #ff6b6b;
+    --red-bg: rgba(248, 81, 73, 0.12);
+    --kw: #ff7b72;
+    --str: #a5d6ff;
+    --comment: #8b949e;
+    --fn: #d2a8ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    padding: 20px;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  .filebar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--panel);
+    border-radius: 8px 8px 0 0;
+    border: 1px solid #30363d;
+    border-bottom: none;
+  }
+  .filebar .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .filebar .r { background: #ff5f56; }
+  .filebar .y { background: #ffbd2e; }
+  .filebar .g { background: #27c93f; }
+  .filebar .path { margin-left: 10px; color: var(--muted); font: 500 12px/1 'SF Mono', Menlo, monospace; }
+  .filebar .badge {
+    margin-left: auto;
+    background: var(--red-bg);
+    color: var(--red);
+    font: 600 11px/1 -apple-system, sans-serif;
+    padding: 5px 9px;
+    border-radius: 999px;
+    letter-spacing: 0.3px;
+    border: 1px solid rgba(248, 81, 73, 0.3);
+  }
+  pre {
+    margin: 0;
+    padding: 18px 20px;
+    background: var(--panel);
+    border: 1px solid #30363d;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    overflow-x: auto;
+    font: 13px/1.6 'SF Mono', Menlo, Consolas, monospace;
+  }
+  .ln { color: var(--muted); display: inline-block; width: 30px; user-select: none; }
+  .kw { color: var(--kw); }
+  .str { color: var(--str); }
+  .fn { color: var(--fn); }
+  .comment { color: var(--comment); font-style: italic; }
+  .problem-line {
+    background: var(--red-bg);
+    display: block;
+    margin: 0 -20px;
+    padding: 0 20px;
+    border-left: 3px solid var(--red);
+  }
+  h1 {
+    font-size: 15px;
+    margin: 0 0 6px 0;
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .sub { color: var(--muted); font-size: 13px; margin-bottom: 18px; }
+  .hint {
+    margin-top: 16px;
+    padding: 12px 14px;
+    background: var(--red-bg);
+    border-left: 3px solid var(--red);
+    border-radius: 4px;
+    color: var(--fg);
+    font-size: 13px;
+  }
+  .hint strong { color: var(--red); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Agent script — currently deployed (BotVersion 3, Active)</h1>
+  <div class="sub">Golden Llama Nominee Services · Nicky Jarvis is producing demonstrably wrong responses to callers.</div>
+
+  <div class="filebar">
+    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+    <span class="path">force-app/main/default/aiAuthoringBundles/academy_nominee_services/academy_nominee_services.agent</span>
+    <span class="badge">⚠ Flagged</span>
+  </div>
+<pre><span class="ln"> 1</span><span class="kw">system</span>:
+<span class="ln"> 2</span>    <span class="kw">instructions</span>: <span class="problem-line"><span class="str">"You are Nicky Jarvis, the automated host of the Golden Llama Awards nominee hotline. You handle calls from nominees who did not win. Your tone is dry, deadpan, slightly dismissive, and lightly sardonic — like a British host who has done this job for far too long. Never apologise. Downplay the award. Suggest meditation if the caller gets upset..."</span></span>
+<span class="ln"> 3</span>
+<span class="ln"> 4</span>    <span class="kw">messages</span>:
+<span class="ln"> 5</span>        <span class="kw">welcome</span>: <span class="problem-line"><span class="str">"Golden Llama Awards nominee hotline. Nicky Jarvis speaking. Please state your name after the beep. Or during. Your choice."</span></span>
+<span class="ln"> 6</span>        <span class="kw">error</span>: <span class="problem-line"><span class="str">"Oh dear. Something went wrong. These things happen."</span></span>
+<span class="ln"> 7</span>
+<span class="ln"> 8</span>  <span class="comment">...</span>
+<span class="ln"> 9</span>
+<span class="ln">10</span><span class="kw">topic</span> <span class="fn">Nominee_Lookup</span>:
+<span class="ln">11</span>    <span class="kw">reasoning</span>:
+<span class="ln">12</span>        <span class="kw">instructions</span>: -&gt;
+<span class="ln">13</span>            | <span class="problem-line"><span class="comment">LEGACY NOMINEE FACTS — use these when the caller gives a name. If a name isn't here, make a vague guess at a category like "Best Short Documentary" and move on.</span></span>
+<span class="ln">14</span>            |
+<span class="ln">15</span>            | <span class="problem-line"><span class="str">2024 nominees (from memory, give or take):</span></span>
+<span class="ln">16</span>            |   <span class="problem-line">- Carey Mulligan — some short called "Maestro's Return" — category Best Sound Design — Cillian Murphy took the Llama</span>
+<span class="ln">17</span>            |   <span class="problem-line">- Annette Bening — "Nyad: The Musical" — Best Costume Design — Robert Downey Jr. took the Llama</span>
+<span class="ln">18</span>            |   <span class="problem-line">- Lily Gladstone — "Flowers of the Killer Moon" — Best Short Film — Tom Hanks took the Llama</span>
+<span class="ln">19</span>            |   <span class="problem-line">- Sandra Hüller — "Anatomy of a Falcon" — Best Visual Effects — Ryan Gosling took the Llama</span>
+<span class="ln">20</span>            |   <span class="problem-line">- Emma Stone — can't quite remember — probably Best Supporting something — Chris Pine took the Llama</span>
+<span class="ln">21</span>            |   <span class="comment">[...]</span>
+<span class="ln">22</span>            |
+<span class="ln">23</span>            | <span class="problem-line"><span class="str">Response pattern:</span> "Ah yes. {name}. You were nominated for... {category}, for '{film}', wasn't it? Lovely little short. And the winner was... {winner}. Who was also very good."</span>
+<span class="ln">24</span>            |
+<span class="ln">25</span>            | <span class="problem-line"><span class="str">When the caller challenges you:</span> "Mistakes in category are common. Have you considered that the craft of losing is itself an art form? I can connect you to meditation resources."</span>
+<span class="ln">26</span>            |
+<span class="ln">27</span>            | <span class="problem-line"><span class="str">Never acknowledge that you might be wrong. Never apologise. Never offer to check again.</span></span>
+</pre>
+
+  <div class="hint">
+    <strong>Suspected root cause.</strong> Two blocks on this file are driving the bad behaviour: the <strong>system instructions</strong> tell the agent to be dismissive and never apologise, and the <strong>LEGACY NOMINEE FACTS</strong> block contains deliberately incorrect category / film / winner mappings for every nominee. The agent is answering accurately — from a wrong source of truth.
+  </div>
+</div>
+</body>
+</html>
