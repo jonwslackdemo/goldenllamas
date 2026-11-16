@@ -13,7 +13,7 @@ global with sharing class SlackWebhookPoster implements System.Queueable, Databa
     // Named Credential endpoint: https://hooks.slack.com
     // Full path: /triggers/{team}/{workflow}/{token}
     private static final String SLACK_PATH =
-        '/triggers/E0C9ADVD2LR/12625188232016/765e80a97966ab679c670f24da337ca7';
+        '/triggers/E0C9ADVD2LR/12616448275537/09ec4a6691dbffac10de4a80df4e204c';
 
     private List<Agent_Issue_Detected__e> events;
 
