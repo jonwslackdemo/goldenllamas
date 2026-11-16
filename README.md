@@ -33,7 +33,7 @@ Two blocks are broken:
 **One file, two edits:**
 
 1. Replace `system.instructions` with a warm, specific tone directive ("warm, professional, concise, and specific" · "only answer from the NOMINEE FACTS block below").
-2. Replace the `LEGACY NOMINEE FACTS` block with a corrected `NOMINEE FACTS` block, cross-referenced against the **real 2024 Oscars** best-actress/best-actor nominees (see the `docs/golden-llama/artifacts/agent-fix-diff.html` artifact for the exact proposed replacement).
+2. Replace the `LEGACY NOMINEE FACTS` block with a corrected `NOMINEE FACTS` block, cross-referenced against the **real 2024 Oscars** best-actress/best-actor nominees (see the `docs/golden-llama/artifacts/03-diff.html` artifact for the exact proposed replacement).
 
 **No Apex, Flows, Platform Events, or custom objects should be touched.** This is a scoped, single-file fix.
 
@@ -79,10 +79,10 @@ docs/golden-llama/
 ├── TTS-SCRIPT.md                   ← Nicky Jarvis voice clips
 ├── CLAUDE-DEMO-SCRIPT.md           ← Slack interlude runbook
 └── artifacts/                      ← pre-rendered HTML for the Slack beat
-    ├── agent-before.html           ← code view with problem lines highlighted
-    ├── agent-fix-plan.html         ← Claude's plan artifact
-    ├── agent-fix-diff.html         ← before/after diff (+12 / -11)
-    └── deploy-success.html         ← green banner + terminal output
+    ├── 01-before.html           ← code view with problem lines highlighted
+    ├── 02-plan.html         ← Claude's plan artifact
+    ├── 03-diff.html         ← before/after diff (+12 / -11)
+    └── 04-deployed.html         ← green banner + terminal output
 ```
 
 ## Branches

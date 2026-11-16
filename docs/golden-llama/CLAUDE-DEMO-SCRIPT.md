@@ -11,9 +11,9 @@ This document is the **minute-by-minute script** for the 90-second "Slack + Clau
 - [ ] Install the Claude Code (fake) app from **Demo Zone → Custom Apps** into the demo org. Make sure it's the current build — Daniel updates it.
 - [ ] The Claude app must be a **member of `#golden-llama-ops`**. @invite it if not.
 - [ ] Have these three files open in a browser tab ready to drag-drop into Slack:
-  - `docs/golden-llama/artifacts/agent-before.html`
-  - `docs/golden-llama/artifacts/agent-fix-diff.html`
-  - `docs/golden-llama/artifacts/deploy-success.html`
+  - `docs/golden-llama/artifacts/01-before.html`
+  - `docs/golden-llama/artifacts/03-diff.html`
+  - `docs/golden-llama/artifacts/04-deployed.html`
 - [ ] Save them to your Desktop so they're easy to drag.
 - [ ] Confirm `#golden-llama-ops` is the channel the Alert card lands in.
 - [ ] Rehearse the thread timing once — the LLM response takes 8-15 seconds; you need to be ready to fill that beat.
@@ -40,7 +40,7 @@ Send.
 
 In the same thread:
 
-1. Click the + icon → upload `agent-before.html` (drag-drop also works)
+1. Click the + icon → upload `01-before.html` (drag-drop also works)
 2. In the message text, type:
 
 ```
@@ -69,7 +69,7 @@ What it *should* say (approximately):
 Thanks. Can you show me the diff as a before/after?
 ```
 
-Then **upload `agent-fix-diff.html`** yourself. The audience sees exactly the artifact the fix card promised. Say over it: *"Here's what Claude is proposing."*
+Then **upload `03-diff.html`** yourself. The audience sees exactly the artifact the fix card promised. Say over it: *"Here's what Claude is proposing."*
 
 ### 00:50 — The approval moment
 
@@ -92,7 +92,7 @@ What it *should* say:
 >
 > Live. Call the hotline back.
 
-**If the LLM response is weak or doesn't produce a visual**, upload `deploy-success.html` yourself with the message:
+**If the LLM response is weak or doesn't produce a visual**, upload `04-deployed.html` yourself with the message:
 
 ```
 Here's the deployment result.
@@ -109,8 +109,8 @@ Trigger the fixed-call scene from `DEMO-NARRATIVE.md`. Nicky Jarvis now gives th
 | Problem | Backup |
 |---|---|
 | Alert card doesn't appear in Slack | Run `sf apex run --target-org demojam-sdo --file apex/fire_demo_alert.apex` from the terminal window you have open on the side |
-| Claude app's LLM response is generic / unhelpful | Upload `agent-fix-diff.html` yourself and narrate over it |
-| Claude app "deploys" but no artifact | Upload `deploy-success.html` |
+| Claude app's LLM response is generic / unhelpful | Upload `03-diff.html` yourself and narrate over it |
+| Claude app "deploys" but no artifact | Upload `04-deployed.html` |
 | The real sf CLI deploy would take too long / fail live | Everything in this demo is a visual simulation — we're not actually calling `sf agent publish` on stage. The real redeploy was pre-staged before the demo started (BotVersion 4 is already live; we just visually tell the story) |
 
 **Important — the agent is already fixed on the org before the demo starts.**
@@ -145,9 +145,9 @@ That leaves 20 seconds of buffer in the 90-second interlude for inevitable stage
 
 ## The three artifacts — what they look like in Slack
 
-1. **`agent-before.html`** — code editor view with red-highlighted problem lines. Audience sees "the broken code", instantly understands there's a `LEGACY NOMINEE FACTS` block full of wrong mappings.
-2. **`agent-fix-diff.html`** — unified diff with red strikethrough and green additions. +12/-11 stats. Includes the sf CLI deploy plan.
-3. **`deploy-success.html`** — green banner ✓, terminal output of the sf commands, timing stamp, "Live" callout. The audience sees Agentforce DX ship in under three seconds.
+1. **`01-before.html`** — code editor view with red-highlighted problem lines. Audience sees "the broken code", instantly understands there's a `LEGACY NOMINEE FACTS` block full of wrong mappings.
+2. **`03-diff.html`** — unified diff with red strikethrough and green additions. +12/-11 stats. Includes the sf CLI deploy plan.
+3. **`04-deployed.html`** — green banner ✓, terminal output of the sf commands, timing stamp, "Live" callout. The audience sees Agentforce DX ship in under three seconds.
 
 All three are self-contained HTML — inline CSS, no external deps. They render identically in Slack's artifact preview regardless of light/dark theme.
 
