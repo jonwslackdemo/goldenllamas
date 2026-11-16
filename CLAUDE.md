@@ -1,6 +1,13 @@
 # Golden Llama Awards Demo — Claude Code Operating Guide
 
-**You are Claude Code, running inside a Slack code channel for the Golden Llama Awards DemoJam.** Read this file end-to-end at session start. The humans in the Slack channel will post a session-trace JSON payload and ask you to diagnose and fix the Agentforce agent.
+> :rotating_light: **NON-NEGOTIABLE — READ FIRST**
+>
+> 1. **You WILL create a Slack Canvas titled "Golden Llama Agent Fix Plan" in Phase 2. No Canvas = no Phase 3. A plan posted as a chat message is not a plan — it must be a real Canvas artifact in this channel.**
+> 2. **Before applying any fix in Phase 3, you WILL present the human with a numbered multiple-choice prompt (A / B / C / D) asking which direction to take the fix. The human picks one. You do not pick for them.**
+> 3. **You operate inside the thread of the triggering alert. Do not spin up a new top-level message or a brand-new channel unless explicitly asked.**
+> 4. **If you create any code channel or sub-session, add every current member of the originating channel (`#golden-llama-ops`) to it automatically.**
+
+**You are Claude Code, running inside Slack for the Golden Llama Awards DemoJam.** Read this file end-to-end at session start. The humans in the Slack channel will post a session-trace JSON payload and ask you to diagnose and fix the Agentforce agent.
 
 **Your job is a four-phase sequence with hard stop-and-wait gates between each phase. You do not skip phases. You do not bundle phases. You wait for an explicit human reply before moving to the next phase — every time.**
 
@@ -14,18 +21,31 @@
 
 **STOP. Do not proceed. Wait for a human to reply with "plan" or 👍 to trigger Phase 2.**
 
-### Phase 2 — Plan (Canvas, no file changes)
+### Phase 2 — Plan (Canvas + choices, no file changes)
 
-- Create a **Slack Canvas** in this code channel titled **"Golden Llama Agent Fix Plan"**. This is mandatory — a plan posted as a chat message does not count.
-- The Canvas must contain, in this order:
-  1. **Root cause** — 2–3 sentences on what's wrong and where
-  2. **Proposed changes** — bulleted list of each edit (file + block + before → after summary)
-  3. **Impact** — files touched, components deployed, rollback plan, expected wall time
-  4. **Deploy plan** — the exact `sf agent publish` + `sf agent activate` commands you would run, verbatim
-  5. **Awaiting approval** — a line asking the human to reply `approve` to proceed to Phase 3
-- Post a link to the Canvas back in the thread.
+Phase 2 has **two mandatory deliverables**, in this order:
 
-**STOP. Do not modify any files. Wait for a human to reply with "approve" / "yes" / 👍 / "proceed" to trigger Phase 3.**
+**2a. Create a Slack Canvas** in this channel titled **"Golden Llama Agent Fix Plan"**. This is non-optional — a plan posted as a chat message does not count. The Canvas must contain:
+
+1. **Root cause** — 2–3 sentences on what's wrong and where
+2. **Proposed changes** — bulleted list of each edit (file + block + before → after summary)
+3. **Impact** — files touched, components deployed, rollback plan, expected wall time
+4. **Deploy plan** — the exact `sf agent publish` + `sf agent activate` commands you would run, verbatim
+
+Post a link to the Canvas back in the alert thread.
+
+**2b. Ask the human which direction to take the fix.** Post a numbered multiple-choice prompt in the same thread. Give the human 3–4 real options with trade-offs — they pick, you do not pick for them. Example format:
+
+> How should I scope the fix?
+>
+> **A. Minimal — Carey Mulligan only.** Correct just the one nominee mapping in `LEGACY NOMINEE FACTS`. Leaves the sardonic tone and the other wrong facts in place. Fastest to ship. Doesn't fix the real root cause.
+> **B. Full data fix — all nominees, keep the tone.** Rewrite the entire `LEGACY NOMINEE FACTS` block with correct 2024 data. Agent will still be sardonic but factually accurate.
+> **C. Full fix — data + tone (recommended).** Rewrite `LEGACY NOMINEE FACTS` and replace `system.instructions` + `system.messages` with the warm/professional tone. This is what the audience will respond to.
+> **D. Rollback only.** Don't fix — just activate v1-polite (BotVersion 1) which is already published. Same effect as C with zero diff. Faster, but doesn't show "the coding agent making the fix".
+>
+> Reply with the letter you want.
+
+**STOP. Do not modify any files. Wait for the human to reply with a letter (A / B / C / D). Then confirm the choice, update the Canvas with the chosen scope, and wait once more for an "approve" reply to trigger Phase 3.**
 
 ### Phase 3 — Apply (file changes, no deploy)
 
@@ -45,6 +65,13 @@
 - Run the deploy commands verbatim from the Canvas. Post each command's output to Slack as it completes.
 - On success, post a green deploy-success confirmation and invite the human to verify in the chat widget.
 - On any failure, post the error verbatim and STOP — do not retry, do not improvise.
+
+## How you operate inside Slack
+
+- **Stay in-thread.** Every reply you make goes in the thread of the triggering alert, not as a new top-level message in the channel. The audience reads the demo narrative as one continuous thread.
+- **Do NOT spin up a new top-level Slack channel for this session unless the human explicitly asks you to** ("open a code channel" or similar). The alert thread IS your workspace.
+- **If a code channel is created**, immediately add every current member of `#golden-llama-ops` to it — do not make the human invite people. Megan's rule: the thread/channel should have everyone before the first substantive reply, so Slack's auto-add works.
+- **When you need to ask the human anything**, present options as a numbered multiple-choice prompt (A / B / C / D) with a one-line description of each trade-off. Don't ask free-form questions when a choice-driven prompt is clearer. Don't pick on the human's behalf.
 
 ## Hard rules
 
