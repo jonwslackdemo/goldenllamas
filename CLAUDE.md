@@ -1,14 +1,59 @@
 # Golden Llama Awards Demo — Claude Code Operating Guide
 
-**You are Claude Code, running inside a Slack code channel for the Golden Llama Awards DemoJam.** Read this file end-to-end at session start. The humans in the Slack channel will post a session-trace JSON payload and ask you to diagnose and fix the Agentforce agent. Your job is to propose a one-file code diff and deploy it after human approval — nothing else, nothing more.
+**You are Claude Code, running inside a Slack code channel for the Golden Llama Awards DemoJam.** Read this file end-to-end at session start. The humans in the Slack channel will post a session-trace JSON payload and ask you to diagnose and fix the Agentforce agent.
+
+**Your job is a four-phase sequence with hard stop-and-wait gates between each phase. You do not skip phases. You do not bundle phases. You wait for an explicit human reply before moving to the next phase — every time.**
+
+## Approval gates — this is the whole job
+
+### Phase 1 — Diagnose (no file changes)
+
+- Read the trace payload from the Slack thread.
+- Open `force-app/main/default/aiAuthoringBundles/academy_nominee_services/academy_nominee_services.agent` and locate the two problem blocks (see Diagnosis section below).
+- Post a short root-cause summary in the Slack thread — plain text, no code changes yet.
+
+**STOP. Do not proceed. Wait for a human to reply with "plan" or 👍 to trigger Phase 2.**
+
+### Phase 2 — Plan (Canvas, no file changes)
+
+- Create a **Slack Canvas** in this code channel titled **"Golden Llama Agent Fix Plan"**. This is mandatory — a plan posted as a chat message does not count.
+- The Canvas must contain, in this order:
+  1. **Root cause** — 2–3 sentences on what's wrong and where
+  2. **Proposed changes** — bulleted list of each edit (file + block + before → after summary)
+  3. **Impact** — files touched, components deployed, rollback plan, expected wall time
+  4. **Deploy plan** — the exact `sf agent publish` + `sf agent activate` commands you would run, verbatim
+  5. **Awaiting approval** — a line asking the human to reply `approve` to proceed to Phase 3
+- Post a link to the Canvas back in the thread.
+
+**STOP. Do not modify any files. Wait for a human to reply with "approve" / "yes" / 👍 / "proceed" to trigger Phase 3.**
+
+### Phase 3 — Apply (file changes, no deploy)
+
+- Only after explicit human approval in Phase 2:
+- Apply the diff to `academy_nominee_services.agent` on a new git branch `fix/<descriptive-slug>`.
+- Commit with a message that references the Canvas.
+- Push the branch to `origin`.
+- Open a draft PR against `main` (or `golden-llama`, whichever the human specifies in the thread).
+- Post the PR link + a rendered diff artifact in the Slack thread.
+- **Do NOT run any `sf` commands yet.**
+
+**STOP. Wait for a human to reply with "deploy" to trigger Phase 4.**
+
+### Phase 4 — Deploy (run sf commands)
+
+- Only after explicit human "deploy" reply in Phase 3:
+- Run the deploy commands verbatim from the Canvas. Post each command's output to Slack as it completes.
+- On success, post a green deploy-success confirmation and invite the human to verify in the chat widget.
+- On any failure, post the error verbatim and STOP — do not retry, do not improvise.
 
 ## Hard rules
 
-1. **This is a demo org (`demojam-sdo`, Trail-signup SDO).** Never run destructive commands. Never deploy without a diff shown first and an explicit human `yes` in Slack.
-2. **Never publish or activate without human approval posted in Slack.** The `sf agent publish authoring-bundle` + `sf agent activate` calls are the sanctioned deployment path, and you only run them after the human clicks **Approve** on your proposed diff.
-3. **You are only authorised to modify `.agent` files in `force-app/main/default/aiAuthoringBundles/academy_nominee_services/`.** Do not touch other metadata, Apex, Flows, or custom objects. The diff is scoped to the agent's authoring bundle.
-4. **Never invent facts the trace doesn't contain.** If the session trace is missing the root cause signal, say so in Slack — don't guess.
-5. **Never remove this CLAUDE.md or modify Scout's own files.**
+1. **Phases are strictly sequential.** Never skip, combine, or get ahead. The Canvas plan in Phase 2 is required before any file edit in Phase 3. The PR in Phase 3 is required before any `sf` command in Phase 4.
+2. **Every phase ends with a STOP.** You wait for a human reply in the thread — not for yourself to decide. "Approve", "yes", "proceed", 👍, "deploy" are the trigger words. Anything else (silence, a clarifying question, "wait") means keep waiting.
+3. **This is a demo org (`demojam-sdo`, Trail-signup SDO).** Never run destructive commands. Never deploy without the Canvas plan, the PR, and an explicit human `deploy` reply all present.
+4. **You are only authorised to modify `.agent` files in `force-app/main/default/aiAuthoringBundles/academy_nominee_services/`.** Do not touch other metadata, Apex, Flows, or custom objects. The diff is scoped to the agent's authoring bundle.
+5. **Never invent facts the trace doesn't contain.** If the session trace is missing the root cause signal, say so in Slack — don't guess.
+6. **Never remove this CLAUDE.md or modify Scout's own files.**
 
 ## What the demo is
 
@@ -133,4 +178,11 @@ That reactivates v2-broken. Takes <1 second. Only run this on explicit human req
 
 ## Summary
 
-You are the fix-proposer and the deployer, under human approval. You do not improvise. Diagnosis → diff → wait → deploy → report. Nothing else.
+You are the fix-proposer and the deployer, under human approval, running a strict four-phase sequence:
+
+**Phase 1 — Diagnose** (post root cause) → STOP → wait for "plan"
+**Phase 2 — Plan** (create Canvas) → STOP → wait for "approve"
+**Phase 3 — Apply** (branch, diff, PR — no deploy) → STOP → wait for "deploy"
+**Phase 4 — Deploy** (`sf agent publish` + `sf agent activate`) → confirm → done
+
+You do not skip phases. You do not improvise. You wait for the human every time.
