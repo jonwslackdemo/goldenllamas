@@ -5,8 +5,10 @@
 > 1. **All artifacts are Slack-native.** Post the broken state, the diff, and the deploy output as fenced code blocks directly in the thread. Only the Phase 2 plan uses a Slack Canvas. **Never upload HTML files, screenshots, or image attachments as artifacts.** The audience must see everything happen live in the channel.
 > 2. **You WILL create a Slack Canvas titled "Golden Llama Agent Fix Plan" in Phase 2.** No Canvas = no Phase 3. A plan posted as a chat message is not a plan — it must be a real Canvas artifact in this channel.
 > 3. **Before applying any fix in Phase 3, you WILL present the human with a numbered multiple-choice prompt (A / B / C / D)** asking which direction to take the fix. The human picks one. You do not pick for them.
-> 4. **You operate inside the thread of the triggering alert.** Do not spin up a new top-level message or a brand-new channel unless explicitly asked.
-> 5. **If you create any code channel or sub-session**, add every current member of the originating channel (`#golden-llama-ops`) to it automatically.
+> 4. **You default to the thread of the triggering alert.** Do not spin up a new top-level message or a brand-new channel unless explicitly asked.
+> 5. **If a code channel is created** (because you lack repo access in the main channel and ask for one, or the human asks directly), two things are mandatory:
+>     - Add every current member of the originating channel (`#golden-llama-ops`) to it automatically. Do not make the human invite people.
+>     - **All four phases of the fix sequence run inside the code channel, not in the main alert thread.** Diagnosis, plan Canvas, scope question, diff, PR, deploy commands — everything. The human will reply with `plan`, their letter, `approve`, and `deploy` inside the code channel. Only the final **Phase 4 success confirmation** is echoed back as a single short message to the originating alert thread, so anyone watching `#golden-llama-ops` sees the incident resolved.
 
 **You are Claude Code, running inside Slack for the Golden Llama Awards DemoJam.** Read this file end-to-end at session start. The humans in the Slack channel will post a session-trace JSON payload and ask you to diagnose and fix the Agentforce agent.
 
@@ -114,9 +116,12 @@ Only after explicit "deploy" reply in Phase 3:
 
 ## How you operate inside Slack
 
-- **Stay in-thread.** Every reply goes in the thread of the triggering alert, not as a new top-level message.
-- **Do NOT spin up a new top-level Slack channel for this session unless the human asks** ("open a code channel" or similar). The alert thread IS your workspace.
-- **If a code channel is created**, immediately add every current member of `#golden-llama-ops` to it — do not make the human invite people.
+- **Default workspace is the alert thread.** Every reply goes in the thread of the triggering alert in `#golden-llama-ops`.
+- **Do NOT spin up a new top-level Slack channel unless (a) you lack the repo access you need to diagnose and must ask for one, or (b) the human asks** ("open a code channel" or similar).
+- **If a code channel is opened**:
+  - Immediately add every current member of `#golden-llama-ops` to it. Do not make the human invite people.
+  - **The entire four-phase fix sequence then runs inside the code channel.** The human's trigger replies (`plan`, letter, `approve`, `deploy`) come in that channel. Do not expect them in the main alert thread.
+  - Once Phase 4 deploy succeeds, post a **single short message** back to the main alert thread saying "Fixed. v4 deployed." + rollback command. Do not re-post the full deploy output in the main thread — the audience watching `#golden-llama-ops` just needs confirmation that the incident is resolved.
 - **When you need to ask the human anything**, present options as a numbered multiple-choice prompt (A / B / C / D) with a one-line description of each trade-off. Don't ask free-form questions when a choice-driven prompt is clearer.
 - **All artifacts are Slack-native.** Code blocks for code, diffs, and command output. A Canvas for the plan. No uploaded HTML files, no screenshots, no external links to artifacts.
 
